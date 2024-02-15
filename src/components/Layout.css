@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    justify-content: center;
+}
+nav a {
+    padding: 20px;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    right: 50px;
+}
