@@ -1,49 +1,62 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
-import Layout from "./components/Layout";
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import MissingPage from "./pages/MissingPage";
-// import "./App.css"
+import "./App.css"
+
+const NavBar = ({routes}) => {
+  const links = routes.map(({component, path}) => (
+      <Link key={component} to={path}
+        style={{
+          padding: 13,
+        }}
+      >
+        {component}
+      </Link>
+  ))
+  return (
+      <div>
+          {links}
+      </div>
+  )
+}
 
 function App() {
     const routes = [
       {
-        component: Home,
-        path: "/",
+        component: 'Home',
+        path: "/"
       },
       {
-        component: About,
-        path: "/pages/About",
+        component: 'About',
+        path: "/pages/About"
       },
       {
-        component: Contact,
-        path: "/pages/Contact",
+        component: 'Contact',
+        path: "/pages/Contact"
       },
-      {
-        component: MissingPage,
-        path: "*",
-      }
     ];
 
     const routesComponents = routes.map(({component, path}) => (
-        <Route key={component} element={component} path={path}>
-            {component}
-        </Route>
+        <Route key={component} path={path} element={<h4>{component}</h4>}/>
     ));
 
     return (
         <div className="App">
-            <Router>
-                <Layout>
-                    <Routes>
-                        {routesComponents}
-                    </Routes>
-                </Layout>
-            </Router>
+          <h1>My Test App</h1>
+          <Router>
+              <NavBar routes={routes} />
+              <Routes>
+                  {routesComponents}
+                  <Route path="*" element={MissingPage}/>
+              </Routes>
+          </Router>
+          {Outlet}
+          <footer>My Test App &copy; 2024</footer>
         </div>
-    )
+    );
 }
 
 export default App;

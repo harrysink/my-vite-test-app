@@ -1,16 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom"
+// import Home from "../pages/Home";
+// import About from "../pages/About";
+// import Contact from "../pages/Contact";
 import "./Layout.css"
 
-function Layout({children}) {
+const NavBar = ({routes}) => {
+    const links = routes.map(({component, path}) => (
+        <Link key={component} to={path}>
+            {component}
+        </Link>
+    ))
+
+    return (
+        <div>
+            {links}
+        </div>
+    )
+}
+
+function Layout() {
     return (
         <div>
             <h1>My Test App</h1>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-            </nav>
-            <main>{children}</main>
+            <NavBar routes={routes} />
             <footer>My Test App &copy; 2024</footer>
         </div>
     )
